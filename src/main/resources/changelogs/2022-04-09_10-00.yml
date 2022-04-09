@@ -1,0 +1,182 @@
+databaseChangeLog:
+  - changeSet:
+      id: department-initial
+      author: bootify.io
+      changes:
+        - createSequence:
+            cycle: false
+            incrementBy: 1
+            sequenceName: primary_sequence
+            startValue: 10000
+        - createTable:
+            tableName: people
+            columns:
+            - column:
+                name: id
+                type: bigint
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: uuid
+                type: character varying(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: first_name
+                type: character varying(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: last_name
+                type: character varying(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: email
+                type: character varying(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: date_created
+                type: timestamp
+                constraints:
+                  nullable: false
+            - column:
+                name: last_updated
+                type: timestamp
+                constraints:
+                  nullable: false
+        - createTable:
+            tableName: department
+            columns:
+            - column:
+                name: id
+                type: bigint
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: department
+                type: character varying(100)
+                constraints:
+                  nullable: false
+            - column:
+                name: name
+                type: character varying(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: date_created
+                type: timestamp
+                constraints:
+                  nullable: false
+            - column:
+                name: last_updated
+                type: timestamp
+                constraints:
+                  nullable: false
+        - createTable:
+            tableName: work_log
+            columns:
+            - column:
+                name: id
+                type: bigint
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: uuid
+                type: character varying(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: work_day
+                type: date
+                constraints:
+                  nullable: false
+            - column:
+                name: start_time
+                type: time
+                constraints:
+                  nullable: false
+            - column:
+                name: stop_time
+                type: time
+                constraints:
+                  nullable: false
+            - column:
+                name: department
+                type: character varying(100)
+                constraints:
+                  nullable: false
+            - column:
+                name: when_people_worked_id
+                type: bigint
+            - column:
+                name: date_created
+                type: timestamp
+                constraints:
+                  nullable: false
+            - column:
+                name: last_updated
+                type: timestamp
+                constraints:
+                  nullable: false
+        - createTable:
+            tableName: people_work_in_departments
+            columns:
+            - column:
+                name: people_id
+                type: bigint
+                constraints:
+                  nullable: false
+            - column:
+                name: department_id
+                type: bigint
+                constraints:
+                  nullable: false
+        - addUniqueConstraint:
+            constraintName: unique_people_uuid
+            tableName: people
+            columnNames: uuid
+        - addUniqueConstraint:
+            constraintName: unique_department_department
+            tableName: department
+            columnNames: department
+        - addUniqueConstraint:
+            constraintName: unique_department_name
+            tableName: department
+            columnNames: name
+        - addForeignKeyConstraint:
+            constraintName: fk_work_log_when_people_worked_id
+            baseTableName: work_log
+            baseColumnNames: when_people_worked_id
+            referencedTableName: people
+            referencedColumnNames: id
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+        - addUniqueConstraint:
+            constraintName: unique_work_log_uuid
+            tableName: work_log
+            columnNames: uuid
+        - addPrimaryKey:
+            constraintName: pk_people_work_in_departments
+            tableName: people_work_in_departments
+            columnNames: people_id, department_id
+        - addForeignKeyConstraint:
+            constraintName: fk_people_work_in_departments_people_id
+            baseTableName: people_work_in_departments
+            baseColumnNames: people_id
+            referencedTableName: people
+            referencedColumnNames: id
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+        - addForeignKeyConstraint:
+            constraintName: fk_people_work_in_departments_department_id
+            baseTableName: people_work_in_departments
+            baseColumnNames: department_id
+            referencedTableName: department
+            referencedColumnNames: id
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
