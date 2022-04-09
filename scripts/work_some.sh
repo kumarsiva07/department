@@ -9,5 +9,5 @@ curl -X 'POST' \
   "startTime": "14:30",
   "stopTime": "18:30",
   "department": "CLOTHING",
-  "whenPeopleWorked": 10001
+  "whenPeopleWorked": 10002
 }'

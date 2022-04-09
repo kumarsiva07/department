@@ -75,6 +75,7 @@ public class FakeDataService {
         shift.setStopTime(currentTime.plusHours(8));
         LocalDate workDay=LocalDate.now().minusDays(ThreadLocalRandom.current().nextInt(0, 6 + 1));
         shift.setWorkDay(workDay);
+        shift.setWhenPeopleWorked(person.getId()); // join those tables together!
         Long id = workLogService.create(shift);
         shift.setId(id);
         return shift;
