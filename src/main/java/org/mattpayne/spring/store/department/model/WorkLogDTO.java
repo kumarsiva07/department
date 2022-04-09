@@ -27,7 +27,7 @@ public class WorkLogDTO {
     private LocalTime startTime;
 
     @NotNull
-    @Schema(type = "string", example = "14:30")
+    @Schema(type = "string", example = "18:30")
     private LocalTime stopTime;
 
     @NotNull
