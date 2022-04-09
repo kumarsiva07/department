@@ -1,4 +1,11 @@
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        # Note that web-allow-others is a HUGE security hold and just good for teaching
+        web-allow-others: true
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:h2:mem:department}
     username: ${JDBC_DATABASE_USERNAME:sa}
