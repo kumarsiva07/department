@@ -10,4 +10,5 @@ import java.util.List;
 public class FakeDTO {
     private List<DepartmentDTO> departments;
     private List<PeopleDTO> people;
+    private List<WorkLogDTO> workedShifts;
 }
