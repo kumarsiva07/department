@@ -25,7 +25,8 @@ public class FakerControllerTest extends BaseIT {
                 "/api/fakers", HttpMethod.POST, request, FakeDTO.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        // Since there are six values in the Departments enum
+        FakeDTO body = response.getBody(); // Set a breakpoint here to see the data generated
+        // Since there are five values in the Departments enum
         assertEquals(5, departmentRepository.count());
     }
 
