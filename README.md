@@ -21,8 +21,16 @@ in the scripts folder there's some curls.  Try them in this order:
 ## Things to look at
 1. I'm trying to use pull requests, so please take a look at https://github.com/payne/department/pulls?q=is%3Apr+is%3Aclosed
 
+## Liquidbase
 
-## `gradle tasks` shows liquidbase tasks (and others)
+1. https://github.com/liquibase/liquibase-gradle-plugin
+2. Nice overview that is not 100% on point https://youtu.be/YhicwD489xQ
+3. https://github.com/stevesaliman/liquibase-workshop is so OLD! Should I have chosen FlyWay??
+4. Might be handy: https://github.com/daquino/liquify
+5. 
+
+
+### `gradle tasks` shows liquidbase tasks (and others)
 
 ```
 

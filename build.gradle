@@ -22,7 +22,15 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-validation')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     runtimeOnly('com.h2database:h2')
+
     implementation('org.liquibase:liquibase-core')
+
+    // https://github.com/liquibase/liquibase-gradle-plugin
+    liquibaseRuntime('org.liquibase:liquibase-core:4.5.0')
+    liquibaseRuntime('org.liquibase:liquibase-groovy-dsl:3.0.0')
+    liquibaseRuntime('info.picocli:picocli:4.6.1')
+    liquibaseRuntime('com.h2database:h2')
+
     implementation('org.springdoc:springdoc-openapi-ui:1.6.6')
     implementation('org.springframework.boot:spring-boot-starter-mail')
     implementation 'com.github.javafaker:javafaker:1.0.2'
@@ -38,4 +46,43 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+// based on https://github.com/liquibase/liquibase-gradle-plugin
+// liquibaseRuntime group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+// configurations {
+//     liquibaseRuntime.extendsFrom runtime
+// }
+configurations.liquibaseRuntime.extendsFrom configurations.runtime
+
+// based on https://github.com/stevesaliman/liquibase-workshop/blob/master/build.gradle
+def myValue = 'myVariablized value'
+liquibase {
+    mainClassName 'org.liquibase.gradle.OutputEnablingLiquibaseRunner'
+    activities {
+        main {
+            changeLogFile 'changelog.groovy'
+            url 'jdbc:h2:mem:department'
+            username 'sa'
+            password ''
+            // driver 'com.mysql.jdbc.Driver'
+
+            changeLogParameters([ myToken: myValue,
+                                  second: 'secondValue'])
+            // changeLogParameters([ myToken: 'myParamValue',
+            // second: 'secondValue'])
+        }
+        second {
+            changeLogFile 'second.groovy'
+            url 'jdbc:h2:mem:department'
+            username 'sa'
+            password ''
+            changeLogParameters([ myToken: 'myvalue',
+                                  second: 'secondValue'])
+        }
+    }
+
+    // runList = project.ext.runList
+    // runList = 'main'
+    runList = 'main, second'
 }
