@@ -22,3 +22,6 @@ in the scripts folder there's some curls.  Try them in this order:
 1. I'm trying to use pull requests, so please take a look at https://github.com/payne/department/pulls?q=is%3Apr+is%3Aclosed
 
 
+
+https://www.liquibase.org/get-started/quickstart
+
