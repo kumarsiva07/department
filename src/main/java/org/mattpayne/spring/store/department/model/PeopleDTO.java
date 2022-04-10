@@ -1,5 +1,6 @@
 package org.mattpayne.spring.store.department.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,6 +29,8 @@ public class PeopleDTO {
     @NotNull
     @Size(max = 255)
     private String email;
+
+    private LocalDate hiredate;
 
     private List<Long> peopleWorkInDepartmentss;
 

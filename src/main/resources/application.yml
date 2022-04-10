@@ -7,7 +7,7 @@ spring:
         # Note that web-allow-others is a HUGE security hold and just good for teaching
         web-allow-others: true
   datasource:
-    url: ${JDBC_DATABASE_URL:jdbc:h2:mem:department}
+    url: ${JDBC_DATABASE_URL:jdbc:h2:./department}
     username: ${JDBC_DATABASE_USERNAME:sa}
     password: ${JDBC_DATABASE_PASSWORD:}
   dbcp2:

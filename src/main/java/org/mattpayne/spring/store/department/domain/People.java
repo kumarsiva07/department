@@ -1,5 +1,6 @@
 package org.mattpayne.spring.store.department.domain;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -52,6 +53,9 @@ public class People {
 
     @Column(nullable = false)
     private String email;
+
+    @Column(nullable = true)
+    private LocalDate hiredate;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
