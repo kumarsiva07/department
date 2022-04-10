@@ -37,7 +37,11 @@ public class FakeDataService {
     }
 
     public FakeDTO createFakeDatasetOne() {
-        List<DepartmentDTO> departmentsList = fillDepartmentTable();
+        List<DepartmentDTO> departmentsList;
+        departmentsList = departmentService.findAll();
+        if (departmentsList.isEmpty()) {
+            departmentsList = fillDepartmentTable();
+        }
         List<PeopleDTO> peopleList = fillPeopleTable(departmentsList, 3);
         List<WorkLogDTO> workedShiftList = fillWorkLog(peopleList, 2);
         FakeDTO fakeDto=new FakeDTO();

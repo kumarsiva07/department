@@ -11,4 +11,4 @@ databaseChangeLog:
                 name: hiredate
                 type: date
                 constraints:
-                  nullable: false
+                  nullable: true
