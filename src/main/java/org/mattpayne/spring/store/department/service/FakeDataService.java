@@ -26,7 +26,7 @@ public class FakeDataService {
     private final PeopleService peopleService;
     private final WorkLogService workLogService;
     private final Faker faker;
-    private int personNumber;
+    private int personNumber; // used in a bad & unsafe way to provide unique emails
 
     public FakeDataService(DepartmentService ds, PeopleService ps, WorkLogService ws) {
         this.departmentService = ds;
@@ -104,7 +104,7 @@ public class FakeDataService {
             person.setLastName(name.lastName());
             LocalDate hireDate=LocalDate.now().minusDays(365*ThreadLocalRandom.current().nextInt(0, 6 + 1));
             person.setHiredate(hireDate);
-            person.setEmail(String.format("staff%d@departmentStore.com", personNumber));
+            person.setEmail(String.format("staff%d@departmentStore.com", personNumber++));
             IdNumber idNumber = faker.idNumber();
             String ssn = idNumber.ssnValid();
             person.setUuid(ssn + " fake UUID");
