@@ -28,5 +28,6 @@ spring:
   liquibase:
     change-log: classpath:domain/changelog-master.yml
     drop-first: false
+    enabled: true
 springdoc:
   pathsToMatch: /api/**
