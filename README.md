@@ -25,3 +25,10 @@ in the scripts folder there's some curls.  Try them in this order:
 
 https://www.liquibase.org/get-started/quickstart
 
+## Maven support
+
+I prefer gradle for my personal projects.  But if you like, maven:
+
+```
+mvn spring-boot:run
+```
