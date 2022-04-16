@@ -74,9 +74,11 @@ public class FakeDataService {
         DepartmentDTO department = departmentService.get(departmentId);
         shift.setDepartment(department.getDepartment());
         shift.setUuid(UUID.randomUUID().toString());
-        LocalTime currentTime = LocalTime.now();
-        shift.setStartTime(currentTime);
-        shift.setStopTime(currentTime.plusHours(8));
+        int startHour = ThreadLocalRandom.current().nextInt(6, 12);
+        LocalTime startTime = LocalTime.of(startHour,0);
+        shift.setStartTime(startTime);
+        int hoursWorked = ThreadLocalRandom.current().nextInt(0, 8);
+        shift.setStopTime(startTime.plusHours(hoursWorked));
         LocalDate workDay=LocalDate.now().minusDays(ThreadLocalRandom.current().nextInt(0, 6 + 1));
         shift.setWorkDay(workDay);
         shift.setWhenPeopleWorked(person.getId()); // join those tables together!

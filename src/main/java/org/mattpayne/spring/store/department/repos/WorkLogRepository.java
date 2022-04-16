@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface WorkLogRepository extends JpaRepository<WorkLog, Long> {
     /*
-        SELECT p.id, p.last_name, p.first_name, d.name, sum(((datediff('ms', '1970-01-01', wl.stop_time) - datediff('ms', '1970-01-01', wl.start_time))/1000)/(60*60)) as total_hours
+     SELECT p.id, p.last_name, p.first_name, d.name,
+     sum(((datediff('ms', '1970-01-01', wl.stop_time) - datediff('ms', '1970-01-01', wl.start_time))/1000)/(60*60))
+     as total_hours
 from
     WORK_LOG as wl,
     people as p,
@@ -18,6 +20,6 @@ from
     p.id = pwd.people_id and
     wl.when_people_worked_id = p.id
     group by p.id
-    order by total_hours;
+    order by total_hours desc;
      */
 }
