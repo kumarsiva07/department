@@ -3,25 +3,30 @@ package org.mattpayne.spring.store.department.domain;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
+import org.mattpayne.spring.store.department.model.WorkInfo;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
+// trying https://stackoverflow.com/questions/60222484/nativequery-mapping-with-sqlresultsetmapping-with-multiple-entity-classes-is
+@SqlResultSetMapping(
+        name = "getHoursReport",
+        classes = {
+                @ConstructorResult(targetClass = WorkInfo.class,
+                        columns = {
+                                @ColumnResult(name = "id", type = Long.class),
+                                @ColumnResult(name = "last_name", type = String.class),
+                                @ColumnResult(name = "first_name", type = String.class),
+                                @ColumnResult(name = "name", type = String.class),
+                                @ColumnResult(name = "total_hours", type = Float.class)
+                        }
+                )
+        }
+)
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter

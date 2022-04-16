@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.mattpayne.spring.store.department.model.HoursReportDTO;
 import org.mattpayne.spring.store.department.model.PeopleDTO;
 import org.mattpayne.spring.store.department.model.SimplePage;
+import org.mattpayne.spring.store.department.model.WorkInfo;
 import org.mattpayne.spring.store.department.service.PeopleService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -69,7 +70,7 @@ public class PeopleController {
     }
 
     @GetMapping("/hours")
-    public ResponseEntity<List<HoursReportDTO>> getHoursReport(
+    public ResponseEntity<List<WorkInfo>> getHoursReport(
             @Parameter(hidden = true) @SortDefault(sort = "id") @PageableDefault(size = 20) final Pageable pageable) {
         return ResponseEntity.ok(peopleService.getHoursReport(pageable));
     }

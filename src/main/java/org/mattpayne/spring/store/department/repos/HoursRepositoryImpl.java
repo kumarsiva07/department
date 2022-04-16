@@ -1,27 +1,23 @@
 package org.mattpayne.spring.store.department.repos;
 
 import org.mattpayne.spring.store.department.model.HoursReportDTO;
+import org.mattpayne.spring.store.department.model.WorkInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 public class HoursRepositoryImpl implements HoursRepository {
-    @Autowired
-    private DataSource dataSource;
 
-    JdbcTemplate jdbcTemplate;
-
-    @PostConstruct
-    public void postConstructor() {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
-    public List<HoursReportDTO> getHoursReport() {
+    public List<WorkInfo> getHoursReport() {
         String query = "SELECT p.id, p.last_name, p.first_name, d.name, "
                 + "sum(((datediff('ms', '1970-01-01', wl.stop_time) - datediff('ms', '1970-01-01', wl.start_time))/1000)/(60*60)) "
                 + "as total_hours "
@@ -37,7 +33,8 @@ public class HoursRepositoryImpl implements HoursRepository {
                 + "order by total_hours desc; ";
 
         // https://automagical2012.wordpress.com/2015/06/24/spring-data-with-jpa-customise-repository/
-        List<HoursReportDTO> listHoursReportDto = jdbcTemplate.query(query, new BeanPropertyRowMapper<HoursReportDTO>());
+        // List<HoursReportDTO> listHoursReportDto = jdbcTemplate.query(query, new BeanPropertyRowMapper<HoursReportDTO>());
+        List<WorkInfo> listHoursReportDto = entityManager.createNamedQuery(query, WorkInfo.class).getResultList();
         return listHoursReportDto;
     }
 }
