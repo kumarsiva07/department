@@ -2,11 +2,14 @@ package org.mattpayne.spring.store.department.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.mattpayne.spring.store.department.config.BaseIT;
 import org.mattpayne.spring.store.department.model.ErrorResponse;
 import org.mattpayne.spring.store.department.model.PeopleDTO;
 import org.mattpayne.spring.store.department.model.SimplePage;
+import org.mattpayne.spring.store.department.model.WorkInfo;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -38,6 +41,17 @@ public class PeopleControllerTest extends BaseIT {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Cras sed interdum...", response.getBody().getUuid());
+    }
+
+    @Test
+    public void getCustomWorkInfo_success() {
+        final HttpEntity<String> request = new HttpEntity<>(null, headers());
+        final ResponseEntity<List<WorkInfo>> response = restTemplate.exchange(
+            "/api/peoples/workInfo", HttpMethod.GET, request, 
+                new ParameterizedTypeReference<List<WorkInfo>>() {});
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(0, response.getBody().size());
     }
 
     @Test

@@ -1,10 +1,12 @@
 package org.mattpayne.spring.store.department.service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.mattpayne.spring.store.department.domain.People;
 import org.mattpayne.spring.store.department.model.PeopleDTO;
 import org.mattpayne.spring.store.department.model.SimplePage;
+import org.mattpayne.spring.store.department.model.WorkInfo;
 import org.mattpayne.spring.store.department.repos.DepartmentRepository;
 import org.mattpayne.spring.store.department.repos.PeopleRepository;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,11 @@ public class PeopleService {
         this.peopleRepository = peopleRepository;
         this.departmentRepository = departmentRepository;
         this.peopleMapper = peopleMapper;
+    }
+
+    public List<WorkInfo> getCustomWorkInfo() {
+        List<WorkInfo> result = peopleRepository.getCustomWorkInfo();
+        return result;
     }
 
     public SimplePage<PeopleDTO> findAll(final Pageable pageable) {
