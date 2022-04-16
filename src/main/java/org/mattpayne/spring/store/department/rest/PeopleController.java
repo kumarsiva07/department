@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.Valid;
+
+import org.mattpayne.spring.store.department.model.HoursReportDTO;
 import org.mattpayne.spring.store.department.model.PeopleDTO;
 import org.mattpayne.spring.store.department.model.SimplePage;
 import org.mattpayne.spring.store.department.service.PeopleService;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -62,6 +66,12 @@ public class PeopleController {
     @GetMapping("/{id}")
     public ResponseEntity<PeopleDTO> getPeople(@PathVariable final Long id) {
         return ResponseEntity.ok(peopleService.get(id));
+    }
+
+    @GetMapping("/hours")
+    public ResponseEntity<List<HoursReportDTO>> getHoursReport(
+            @Parameter(hidden = true) @SortDefault(sort = "id") @PageableDefault(size = 20) final Pageable pageable) {
+        return ResponseEntity.ok(peopleService.getHoursReport(pageable));
     }
 
     @PostMapping

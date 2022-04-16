@@ -30,5 +30,18 @@ public class FakerControllerTest extends BaseIT {
         assertEquals(5, departmentRepository.count());
     }
 
+    // Finer grained unit tests would be good.  But here's a quick attempt at one and done
+    @Test
+    public void getHoursReport() {
+        final HttpEntity<String> request = new HttpEntity<>(headers());
+        final ResponseEntity<FakeDTO> response = restTemplate.exchange(
+                "/api/fakers", HttpMethod.POST, request, FakeDTO.class);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        FakeDTO body = response.getBody(); // Set a breakpoint here to see the data generated
+        // Since there are five values in the Departments enum
+        assertEquals(5, departmentRepository.count());
+    }
+
 
 }
