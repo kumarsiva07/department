@@ -15,13 +15,12 @@ public class WorkInfoRepositoryImpl implements WorkInfoRepository {
 
     @Override
     public List<WorkInfo> getCustomWorkInfo() {
+        // TODO: Read this from a file
         String query = "SELECT p.id, p.last_name, p.first_name, d.name, "
-                + "sum(" +
-                "(" +
-                "(datediff('ms', '1970-01-01', wl.stop_time) - datediff('ms', '1970-01-01', wl.start_time)/1000)" +
-                ")" +
-                "/(60*60)" +
-                ") " // end of the sum
+                + "(sum(" +
+                "(datediff('ms', '1970-01-01', wl.stop_time) - datediff('ms', '1970-01-01', wl.start_time))/1000" +
+                ")"
+                +"/(60*60))"
                 + "as total_hours "
                 + "from "
                 + "WORK_LOG as wl, "
@@ -36,6 +35,7 @@ public class WorkInfoRepositoryImpl implements WorkInfoRepository {
 
         // TODO Auto-generated method stub
         Query queryResult = entityManager.createNativeQuery(query,"getHoursReport");
+        System.out.println("\n\n"+query+"\n\n");
         List rl = queryResult.getResultList();
         return rl; // local var for debugging
     }
