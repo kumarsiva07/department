@@ -45,6 +45,7 @@ public class PeopleControllerTest extends BaseIT {
 
     @Test
     public void getCustomWorkInfo_success() {
+        System.out.println("\n\n********** getCustomWorkInfo_success\n\n");
         final HttpEntity<String> request = new HttpEntity<>(null, headers());
         final ResponseEntity<List<WorkInfo>> response = restTemplate.exchange(
             "/api/peoples/workInfo", HttpMethod.GET, request, 
