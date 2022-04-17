@@ -11,4 +11,8 @@ public class WorkInfo {
   private Long id;
   private String firstName, lastName, name;
   private Float hoursWorked;
+
+  public String toString() {
+    return String.format("%s, %s worked %f in %s", lastName, firstName, hoursWorked, name);
+  }
 }

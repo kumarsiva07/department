@@ -37,7 +37,7 @@ public class WorkInfoRepositoryImpl implements WorkInfoRepository {
         Query queryResult = entityManager.createNativeQuery(query,"getHoursReport");
         List rl = queryResult.getResultList();
         System.out.println(rl);
-        return results;
+        return rl;
     }
     
 }

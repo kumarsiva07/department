@@ -66,7 +66,11 @@ public class PeopleController {
 
     @GetMapping("/workInfo")
     public ResponseEntity<List<WorkInfo>> getCustomWorkInfo() {
-        return ResponseEntity.ok(peopleService.getCustomWorkInfo());
+        List<WorkInfo> listWorkInfo =  peopleService.getCustomWorkInfo();
+        for (WorkInfo wi: listWorkInfo) {
+            System.out.println(wi);
+        }
+        return ResponseEntity.ok(listWorkInfo);
     }
 
     @GetMapping("/{id}")
