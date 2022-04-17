@@ -30,14 +30,9 @@ public class WorkInfoRepositoryImpl implements WorkInfoRepository {
                 + "order by total_hours desc; ";
 
         // TODO Auto-generated method stub
-        List<WorkInfo> results = new ArrayList<>();
-        System.out.println("***** entityMangager:");
-        System.out.println(entityManager);
-        System.out.println("^^^^ that is entityManager");
         Query queryResult = entityManager.createNativeQuery(query,"getHoursReport");
         List rl = queryResult.getResultList();
-        System.out.println(rl);
-        return rl;
+        return rl; // local var for debugging
     }
     
 }
