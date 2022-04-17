@@ -16,7 +16,12 @@ public class WorkInfoRepositoryImpl implements WorkInfoRepository {
     @Override
     public List<WorkInfo> getCustomWorkInfo() {
         String query = "SELECT p.id, p.last_name, p.first_name, d.name, "
-                + "sum(((datediff('ms', '1970-01-01', wl.stop_time) - datediff('ms', '1970-01-01', wl.start_time))/1000)/(60*60)) "
+                + "sum(" +
+                "(" +
+                "(datediff('ms', '1970-01-01', wl.stop_time) - datediff('ms', '1970-01-01', wl.start_time)/1000)" +
+                ")" +
+                "/(60*60)" +
+                ") " // end of the sum
                 + "as total_hours "
                 + "from "
                 + "WORK_LOG as wl, "
