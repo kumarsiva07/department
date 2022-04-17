@@ -37,4 +37,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging {
+    // set options for log level LIFECYCLE
+      events "failed"
+    }
+    testLogging.showStandardStreams = true
 }
+

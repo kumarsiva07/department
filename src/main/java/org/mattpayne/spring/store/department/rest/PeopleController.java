@@ -4,9 +4,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.List;
+
 import javax.validation.Valid;
 import org.mattpayne.spring.store.department.model.PeopleDTO;
 import org.mattpayne.spring.store.department.model.SimplePage;
+import org.mattpayne.spring.store.department.model.WorkInfo;
 import org.mattpayne.spring.store.department.service.PeopleService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -57,6 +61,13 @@ public class PeopleController {
     public ResponseEntity<SimplePage<PeopleDTO>> getAllPeoples(
             @Parameter(hidden = true) @SortDefault(sort = "id") @PageableDefault(size = 20) final Pageable pageable) {
         return ResponseEntity.ok(peopleService.findAll(pageable));
+    }
+
+
+    @GetMapping("/workInfo")
+    public ResponseEntity<List<WorkInfo>> getCustomWorkInfo() {
+        List<WorkInfo> listWorkInfo =  peopleService.getCustomWorkInfo();
+        return ResponseEntity.ok(listWorkInfo);
     }
 
     @GetMapping("/{id}")
