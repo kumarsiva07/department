@@ -53,6 +53,7 @@ public class PeopleControllerTest extends BaseIT {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(0, response.getBody().size());
+        assertEquals(4, 5, "message: ");
     }
 
     @Test
