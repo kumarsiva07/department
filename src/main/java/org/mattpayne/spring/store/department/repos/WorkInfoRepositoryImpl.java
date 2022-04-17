@@ -33,9 +33,8 @@ public class WorkInfoRepositoryImpl implements WorkInfoRepository {
                 + "group by p.id "
                 + "order by total_hours desc; ";
 
-        // TODO Auto-generated method stub
-        Query queryResult = entityManager.createNativeQuery(query,"getHoursReport");
-        System.out.println("\n\n"+query+"\n\n");
+        Query queryResult = entityManager.createNativeQuery(query,
+                "getHoursReport");
         List rl = queryResult.getResultList();
         return rl; // local var for debugging
     }
